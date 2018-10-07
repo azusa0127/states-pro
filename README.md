@@ -29,7 +29,7 @@ DSL ::= 'define stateMachine :{' BODY '}'
 ACTION ::= 'draw' | 'merge'
 BODY ::= STATEMENT';'[ STATEMENT';']*
 STATEMENT ::= NODELHS['->' NODERHS (',' NODERHS)*]?
-NODELHS ::= string['(' STATE (',' LABEL )? ')']? // label is optional
+NODELHS ::= string['(' STATE (',' LABEL )? ')']?
 STATE ::= 's' | 'f' | 'sf' | 'fs' | 'n'
 NODERHS ::= string['(' LABEL ')']?
 LABEL ::= string
@@ -139,7 +139,7 @@ define stateMachine m {
     a(s) -> b(0), e($\epsilon$), h(0);
     b -> c($\epsilon$);
     c -> d(1);
-    d(f); // this case I discussed in the previous thread
+    d(f);
     e -> f(1), g(1);
     h -> i(1);
     i -> j($\epsilon$);
