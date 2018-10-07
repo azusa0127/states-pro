@@ -62,9 +62,9 @@ define stateMchine m {
 \begin{tikzpicture}[shorten >=1pt,node distance=2.8cm,on grid,auto]
     \node[state,initial,accepting] (q0)   {$q_0$};
     \path[->]
-        (q0) edge [loop above] node {$b$} (q0)
-                edge [loop below] node {$a$} (q0)
-                edge [loop right] node {$c$} (q0);
+    (q0) edge [loop above] node {$b$} (q0)
+         edge [loop below] node {$a$} (q0)
+         edge [loop right] node {$c$} (q0);
 \end{tikzpicture}
 ```
 
@@ -88,12 +88,12 @@ define stateMachine m {
     \node[state,accepting] (q2) [below=of q1] {$q_2$};
     \node[state,accepting] (q3) [below=of q0] {$q_3$};
     \path[->]
-        (q0) edge node {$0$} (q1)
-        (q0) edge node {$1,2$} (q3)
-        (q1) edge node {$0$} (q2)
-        (q2) edge node {$1,2$} (q3)
-        (q2) edge [loop below] node {$0$} (q2)
-        (q3) edge [loop below] node {$1,2$} (q3);
+    (q0) edge node {$0$} (q1)
+    (q0) edge node {$1,2$} (q3)
+    (q1) edge node {$0$} (q2)
+    (q2) edge node {$1,2$} (q3)
+    (q2) edge [loop below] node {$0$} (q2)
+    (q3) edge [loop below] node {$1,2$} (q3);
 \end{tikzpicture}
 ```
 
@@ -135,33 +135,6 @@ define stateMachine m {
 #### Tree
 
 ```
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
-  \node[state,initial] (a)  {$a$};
-  \node[state] (b) [above right=of a] {$b$};
-  \node[state] (c) [above right=of b] {$c$};
-  \node[state,accepting] (d) [right=of c] {$d$};
-  \node[state] (e) [right=of a] {$e$};
-  \node[state] (f) [above right=of e] {$f$};
-  \node[state] (g) [right=of e] {$g$};
-  \node[state] (h) [below right=of a] {$h$};
-  \node[state] (i) [right=of h] {$i$};
-  \node[state] (j) [right=of i] {$j$};
-  \node[state] (k) [right=of j] {$k$};
-  \path[->]
-  (a) edge node {0} (b)
-    edge node {$\epsilon$} (e)
-    edge node {0} (h)
-  (b) edge node {$\epsilon$} (c)
-  (c) edge node {1} (d)
-  (e) edge node {1} (f)
-    edge node {1} (g)
-  (h) edge node {1} (i)
-  (i) edge node {$\epsilon$} (j)
-  (j) edge node {$\epsilon$} (k);
-\end{tikzpicture}
-```
-
-```
 define stateMachine m {
     a(s) -> b(0), e($\epsilon$), h(0);
     b -> c($\epsilon$);
@@ -174,6 +147,33 @@ define stateMachine m {
 }
 ```
 
+```
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+    \node[state,initial] (a)  {$a$};
+    \node[state] (b) [above right=of a] {$b$};
+    \node[state] (c) [above right=of b] {$c$};
+    \node[state,accepting] (d) [right=of c] {$d$};
+    \node[state] (e) [right=of a] {$e$};
+    \node[state] (f) [above right=of e] {$f$};
+    \node[state] (g) [right=of e] {$g$};
+    \node[state] (h) [below right=of a] {$h$};
+    \node[state] (i) [right=of h] {$i$};
+    \node[state] (j) [right=of i] {$j$};
+    \node[state] (k) [right=of j] {$k$};
+    \path[->]
+    (a) edge node {0} (b)
+        edge node {$\epsilon$} (e)
+        edge node {0} (h)
+    (b) edge node {$\epsilon$} (c)
+    (c) edge node {1} (d)
+    (e) edge node {1} (f)
+        edge node {1} (g)
+    (h) edge node {1} (i)
+    (i) edge node {$\epsilon$} (j)
+    (j) edge node {$\epsilon$} (k);
+\end{tikzpicture}
+```
+
 ![tree](./images/tree.png)
 
 #### Complex
@@ -183,12 +183,12 @@ define StateMachine m {
     q0(s) -> q1({$\epsilon, \epsilon \rightarrow \$ $};
     q1 -> q2($a, \epsilon \rightarrow a $), q2($b, \epsilon \rightarrow b $); // label location for this complex label
     q2 -> q3($a, \epsilon \rightarrow a $), q3($b, \epsilon \rightarrow b $),$a);
-     q2 -> q6($\epsilon \rightarrow \epsilon $), q6($b, \epsilon \rightarrow \epsilon $);
+    q2 -> q6($\epsilon \rightarrow \epsilon $), q6($b, \epsilon \rightarrow \epsilon $);
     q3 -> q4($a, \epsilon \rightarrow a $), q4($b, \epsilon \rightarrow b $);
     q4 -> q5($a, a \rightarrow \epsilon $), q5($b, b \rightarrow \epsilon $), q1($\epsilon, \epsilon \rightarrow \epsilon $);
     q5 -> q6($a, a \rightarrow \epsilon $), q6($b, b \rightarrow \epsilon $);
-        q6 ->  q7($a, a \rightarrow \epsilon $), q7($b, b \rightarrow \epsilon $);
-        q7 -> q8($\epsilon, \$ \rightarrow \epsilon $), q5($a, a \rightarrow \epsilon $), q5($b, b \rightarrow \epsilon $);
+    q6 -> q7($a, a \rightarrow \epsilon $), q7($b, b \rightarrow \epsilon $);
+    q7 -> q8($\epsilon, \$ \rightarrow \epsilon $), q5($a, a \rightarrow \epsilon $), q5($b, b \rightarrow \epsilon $);
     q8(f);
 }
 ```
@@ -205,25 +205,25 @@ define StateMachine m {
     \node[state] (q7) [left=of q6] {$q_7$};
     \node[state,accepting] (q8) [left=of q7] {$q_8$};
     \path[->]
-        (q0) edge node {$\epsilon, \epsilon \rightarrow \$ $} (q1)
-        (q1) edge node {$a, \epsilon \rightarrow a $} (q2)
-                edge node [below] {$b, \epsilon \rightarrow b $} (q2)
-        (q2) edge node {$a, \epsilon \rightarrow a $} (q3)
-                edge node [below] {$b, \epsilon \rightarrow b $} (q3)
-                edge node [left] {$a, \epsilon \rightarrow \epsilon $} (q6)
-                edge node {$b, \epsilon \rightarrow \epsilon $} (q6)
-        (q3) edge node {$a, \epsilon \rightarrow a $} (q4)
-                edge node [below] {$b, \epsilon \rightarrow b $} (q4)
-        (q4) edge node [above left] {$a, a \rightarrow \epsilon $} (q5)
-                edge node {$b, b \rightarrow \epsilon $} (q5)
-                edge [bend right] node [above] {$\epsilon, \epsilon \rightarrow \epsilon $} (q1)
-        (q5) edge node [above] {$a, a \rightarrow \epsilon $} (q6)
-                edge node {$b, b \rightarrow \epsilon $} (q6)
-        (q6) edge node [above] {$a, a \rightarrow \epsilon $} (q7)
-                edge node {$b, b \rightarrow \epsilon $} (q7)
-        (q7) edge node {$\epsilon, \$ \rightarrow \epsilon $} (q8)
-                edge [bend right] node {$a, a \rightarrow \epsilon $} (q5)
-                edge [bend right] node [below] {$b, b \rightarrow \epsilon $} (q5);
+    (q0) edge node {$\epsilon, \epsilon \rightarrow \$ $} (q1)
+    (q1) edge node {$a, \epsilon \rightarrow a $} (q2)
+         edge node [below] {$b, \epsilon \rightarrow b $} (q2)
+    (q2) edge node {$a, \epsilon \rightarrow a $} (q3)
+         edge node [below] {$b, \epsilon \rightarrow b $} (q3)
+         edge node [left] {$a, \epsilon \rightarrow \epsilon $} (q6)
+         edge node {$b, \epsilon \rightarrow \epsilon $} (q6)
+    (q3) edge node {$a, \epsilon \rightarrow a $} (q4)
+         edge node [below] {$b, \epsilon \rightarrow b $} (q4)
+    (q4) edge node [above left] {$a, a \rightarrow \epsilon $} (q5)
+         edge node {$b, b \rightarrow \epsilon $} (q5)
+         edge [bend right] node [above] {$\epsilon, \epsilon \rightarrow \epsilon $} (q1)
+    (q5) edge node [above] {$a, a \rightarrow \epsilon $} (q6)
+         edge node {$b, b \rightarrow \epsilon $} (q6)
+    (q6) edge node [above] {$a, a \rightarrow \epsilon $} (q7)
+         edge node {$b, b \rightarrow \epsilon $} (q7)
+    (q7) edge node {$\epsilon, \$ \rightarrow \epsilon $} (q8)
+         edge [bend right] node {$a, a \rightarrow \epsilon $} (q5)
+         edge [bend right] node [below] {$b, b \rightarrow \epsilon $} (q5);
 \end{tikzpicture}
 ```
 
