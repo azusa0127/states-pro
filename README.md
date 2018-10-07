@@ -22,7 +22,18 @@ A DSL aims to draw state machines, turing machines, and Pushdown Automata.
 
 ## EBNF
 
-TODO:
+```
+DSL ::= 'define stateMachine :{' BODY '}'
+ACTION ::= 'draw' | 'merge'
+BODY ::= STATEMENT';'[ STATEMENT';']*
+STATEMENT ::= NODELHS['->' NODERHS (',' NODERHS)*]?
+NODELHS ::= string['(' STATE (',' LABEL )? ')']? // label is optional
+STATE ::= 's' | 'f' | 'sf' | 'fs' | 'n'
+NODERHS ::= string['(' LABEL ')']?
+LABEL ::= string
+```
+
+1. Label in the NODELHS is optional, if users doesn't specify the label, we will use variable name as a default value.
 
 ## Examples
 
@@ -36,6 +47,26 @@ define stateMachine m {
     q4(f) -> q1(\epsilon);
 }
 ```
+
+#### Loop Back Single State
+
+```
+define stateMchine m {
+    q0(sf, $q_0$) -> q0(a), q0(b), q0(c);
+}
+```
+
+```
+\begin{tikzpicture}[shorten >=1pt,node distance=2.8cm,on grid,auto]
+        \node[state,initial,accepting] (q0)   {$q_0$};
+        \path[->]
+            (q0) edge [loop above] node {$b$} (q0)
+                 edge [loop below] node {$a$} (q0)
+                 edge [loop right] node {$c$} (q0);
+\end{tikzpicture}
+```
+
+![loop back single state](./images/loop_back_single_state.png)
 
 ### Merge State Machine
 
