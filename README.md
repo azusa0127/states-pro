@@ -24,29 +24,48 @@ A DSL aims to draw state machines, turing machines, and Pushdown Automata.
 
 ## EBNF
 
-```
-DSL ::= 'define stateMachine :{' BODY '}'
-ACTION ::= 'draw' | 'merge'
-BODY ::= STATEMENT';'[ STATEMENT';']*
-STATEMENT ::= NODELHS['->' NODERHS (',' NODERHS)*]?
-NODELHS ::= string['(' STATE (',' LABEL )? ')']?
-STATE ::= 's' | 'f' | 'sf' | 'fs' | 'n'
-NODERHS ::= string['(' LABEL ')']?
-LABEL ::= string
-```
+```bnf
 
-1. Label in the NODELHS is optional, if users doesn't specify the label, we will use variable name as a default value.
+WhiteSpace ::= " " | "\t" | "\r"
+LineBreak ::= "\n"
+Letter ::= "a" | "b" | ... | "z" | "A" | ... | "Z"
+Digit ::= "0" | "1" | "2" | ... | "9" ;
+Symbol = "[" | "]" | "{" | "}" | "(" | ")" | "<" | ">" | "'" | '"' | "=" | "|" | "." | "," | ";" | "\";
+String = { WhiteSpace | Letter | Digit | Symbol }
+
+Label ::= StringLabel | LatexLabel | Identifier
+LatexLabel ::= "$", String, "$"
+StringLabel ::= "`", String, "`"
+Identifier = Letter, { Letter | Digit | "_" }
+
+FigureType ::= 'StateMachine'
+
+Program ::= DefineOperation, { DefineOperation | DrawOperation | MergeOperation }
+
+DefineOperation ::= 'define', FigureType, Identifier, "{", LineBreak, DefineStmt, { DefineStmt }, "}", LineBreak
+DefineStmt ::= Node, [ '->', Edge, { ",", Edge} ], LineBreak
+Node ::= Identifier, [ "(", NodeState, [ ",", Label, ")" ] ]
+Edge ::= Identifier, [ "(", Label, ")" ]
+NodeState ::= 's' | 'f' | 'sf' | 'fs' | 'n'
+
+DrawOperation ::= 'draw', Identifier, LineBreak
+
+MergeOperation ::= 'merge', FigureType, Identifier, Identifier, 'as', Identifier, "{", LineBreak, MergeStmt, { MergeStmt }, "}", LineBreak
+MergeStmt ::= MergeNode, [ '->', MergeEdge, { ",", MergeEdge } ], LineBreak
+PropIdentifier ::= Identifier, ".", Identifier
+MergeNode ::= PropIdentifier, [ "(", NodeState, [",", Label, ")" ] ]
+MergeEdge ::= PropIdentifier, [ "(", Label, ")" ]
+```
 
 ## Examples
 
 ### Create State Machine
 
-```
-define stateMachine m {
-    q1(s) -> q2(0), q3(1);
-    q2(f);
-    q3 -> q1(0), q4(0);
-    q4(f) -> q1(\epsilon);
+```dsl
+define StateMachine m1 {
+  q1(n,`M.I.D`) -> q2(`0`), q3($0,1,\epsilon$)
+  q2(sf, qAccept) -> q1(`0,1`)
+  q3(f,$q_3$)
 }
 ```
 
