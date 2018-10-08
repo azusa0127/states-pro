@@ -1,3 +1,6 @@
 module.exports = {
-  "extends": "standard-next"
+  "extends": "standard-next",
+  "rules": {
+    "space-before-function-paren": "off"
+  }
 };

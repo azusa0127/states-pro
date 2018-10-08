@@ -6,7 +6,7 @@ const diff = require('diff');
 const { parseDSL } = require('./parser');
 const { interpretDSL } = require('./interpreter');
 
-// A convinient debug console printer with same interface as `global.console`
+// A convenient debug console printer with same interface as `global.console`
 const logger = new Logger({ level: 'log', showTime: false });
 
 // Main Function

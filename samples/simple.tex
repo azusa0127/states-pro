@@ -1,15 +1,15 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
-    \node[state,initial,accepting] (q1)   {$\text{M.I.D}$};
-    \node[state] (q2) [right=of q1] {$qAccept$};
-    \node[state,accepting] (q3) [below=of q1] {$q_3$};
-    \path[->]
-        (q1) edge node {$\text{0}$} (q2)
-        (q1) edge node {$0,1,\epsilon$} (q3)
-        (q2) edge node {$\text{0,1}$} (q1);
+	\node[state,initial,accepting] (q1)   {$\text{M.I.D}$};
+	\node[state] (q2) [right=of q1] {$qAccept$};
+	\node[state,accepting] (q3) [below=of q1] {$q_3$};
+	\path[->]
+	(q1) edge node {$\text{0}$} (q2)
+	(q1) edge node {$0,1,\epsilon$} (q3)
+	(q2) edge node {$\text{0,1}$} (q1);
 \end{tikzpicture}
 
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
-    \node[state,initial,accepting] (q5)   {$LoopBack$};
-    \path[->]
-        (q5) edge [loop] node {$\text{0}$} (q5);
+	\node[state,initial,accepting] (q5)   {$LoopBack$};
+	\path[->]
+	(q5) edge [loop] node {$\text{0}$} (q5);
 \end{tikzpicture}

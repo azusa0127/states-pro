@@ -20,7 +20,7 @@ const BaseCstVisitor = parser.getBaseCstVisitorConstructor();
 // All our semantics go into the visitor, completly separated from the grammar.
 // Feel free to refactor the RULES more from parser if needed.
 class DSLInterpreter extends BaseCstVisitor {
-  constructor () {
+  constructor() {
     super();
     // This helper will detect any missing or redundant methods on this visitor
     this.validateVisitor();
@@ -28,27 +28,27 @@ class DSLInterpreter extends BaseCstVisitor {
 
   // Entrance of the DSL interpretation, should use the CST tree passed in
   // to determine other interpreter calls.
-  Program (ctx) {
+  Program(ctx) {
     // TODO: Implement this.
     return 'STUB -- Program Interpreter Unimplemented';
   }
 
-  DefineOperation (ctx) {
+  DefineOperation(ctx) {
     // TODO: Implement this.
     return 'STUB -- DefineOperation Interpreter Unimplemented';
   }
 
-  DefineStmt (ctx) {
+  DefineStmt(ctx) {
     // TODO: Implement this.
     return 'STUB -- DefineStmt Interpreter Unimplemented';
   }
 
-  Node (ctx) {
+  Node(ctx) {
     // TODO: Implement this.
     return 'STUB -- Node Interpreter Unimplemented';
   }
 
-  Edge (ctx) {
+  Edge(ctx) {
     // TODO: Implement this.
     return 'STUB -- Edge Interpreter Unimplemented';
   }

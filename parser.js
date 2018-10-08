@@ -43,7 +43,7 @@ const DSLLexer = new Lexer(allTokens);
 
 // ----------------- parser -----------------
 class DSLParse extends Parser {
-  constructor (input) {
+  constructor(input) {
     super(allTokens);
 
     // for conciseness, not mandatory
@@ -75,7 +75,7 @@ class DSLParse extends Parser {
         $.CONSUME(RightArrow);
         $.AT_LEAST_ONE_SEP({
           SEP: Comma,
-          DEF () {
+          DEF() {
             $.SUBRULE($.Edge);
           }
         });
@@ -91,9 +91,9 @@ class DSLParse extends Parser {
         $.OPTION1(() => {
           $.CONSUME(Comma);
           $.OR([
-            { ALT () { $.CONSUME1(Identifier); } },
-            { ALT () { $.CONSUME(StringLabel); } },
-            { ALT () { $.CONSUME(LatexLabel); } },
+            { ALT() { $.CONSUME1(Identifier); } },
+            { ALT() { $.CONSUME(StringLabel); } },
+            { ALT() { $.CONSUME(LatexLabel); } },
           ]);
         });
         $.CONSUME(RParen);
@@ -105,9 +105,9 @@ class DSLParse extends Parser {
       $.OPTION(() => {
         $.CONSUME(LParen);
         $.OR([
-          { ALT () { $.CONSUME1(Identifier); } },
-          { ALT () { $.CONSUME(StringLabel); } },
-          { ALT () { $.CONSUME(LatexLabel); } },
+          { ALT() { $.CONSUME1(Identifier); } },
+          { ALT() { $.CONSUME(StringLabel); } },
+          { ALT() { $.CONSUME(LatexLabel); } },
         ]);
         $.CONSUME(RParen);
       });

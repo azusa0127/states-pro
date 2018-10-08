@@ -12,8 +12,6 @@ test/*.js
 test/*.map
 .DS_Store
 .env
-data
-.nyc_output
 Icon?
 
 # Logs
@@ -89,3 +87,5 @@ typings/
 
 # Serverless directories
 .serverless
+
+samples/playground.*
