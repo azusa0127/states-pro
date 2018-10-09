@@ -53,7 +53,7 @@ DrawOperation ::= 'draw', Identifier, LineBreak
 MergeOperation ::= 'merge', FigureType, Identifier, Identifier, 'as', Identifier, "{", LineBreak, MergeStmt, { MergeStmt }, "}", LineBreak
 MergeStmt ::= MergeNode, [ '->', MergeEdge, { ",", MergeEdge } ], LineBreak
 PropIdentifier ::= Identifier, ".", Identifier
-MergeNode ::= PropIdentifier, [ "(", NodeState, [",", Label], ")" ]
+MergeNode ::= PropIdentifier, [ "(", NodeState, [ ",", Label ], ")" ]
 MergeEdge ::= PropIdentifier, [ "(", Label, ")" ]
 ```
 
@@ -94,7 +94,7 @@ define StateMachine m {
 ```
 define StateMachine m {
     q0(s, $q_0$) -> q1(`0`), q2(`1,2`)
-    q1(n, $q_1$) -> q2(0)
+    q1(n, $q_1$) -> q2(`0`)
     q2(f, $q_2$) -> q2(`0`), q3(`1,2`)
     q3(f, $q_3$) -> q3(`1,2`)
 }

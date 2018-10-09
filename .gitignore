@@ -88,4 +88,8 @@ typings/
 # Serverless directories
 .serverless
 
-samples/playground.*
+# tex playground
+playground
+
+# .editorconfig
+.editorconfig
