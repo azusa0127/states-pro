@@ -1,0 +1,10 @@
+define StateMachine m1 {
+  q1(sf,`M.I.D`) -> q2(`0`), q3($0,1,\epsilon$)
+  q2(n, qAccept) -> q1(`0,1`)
+  q3(f,$q_3$)
+}
+
+
+draw m1
+
+

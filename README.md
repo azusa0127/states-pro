@@ -36,7 +36,8 @@ String = { WhiteSpace | Letter | Digit | Symbol }
 Label ::= StringLabel | LatexLabel | Identifier
 LatexLabel ::= "$", String, "$"
 StringLabel ::= "`", String, "`"
-Identifier = Letter, { Letter | Digit | "_" }
+Identifier ::= Letter, { Letter | Digit | "_" }
+PropIdentifier ::= Identifier, ".", Identifier
 
 FigureType ::= 'StateMachine'
 
@@ -52,7 +53,6 @@ DrawOperation ::= 'draw', Identifier, LineBreak
 
 MergeOperation ::= 'merge', FigureType, Identifier, Identifier, 'as', Identifier, "{", LineBreak, MergeStmt, { MergeStmt }, "}", LineBreak
 MergeStmt ::= MergeNode, [ '->', MergeEdge, { ",", MergeEdge } ], LineBreak
-PropIdentifier ::= Identifier, ".", Identifier
 MergeNode ::= PropIdentifier, [ "(", NodeState, [ ",", Label ], ")" ]
 MergeEdge ::= PropIdentifier, [ "(", Label, ")" ]
 ```

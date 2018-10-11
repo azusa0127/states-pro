@@ -28,29 +28,58 @@ class DSLInterpreter extends BaseCstVisitor {
 
   // Entrance of the DSL interpretation, should use the CST tree passed in
   // to determine other interpreter calls.
-  Program(ctx) {
+  Program (ctx) {
     // TODO: Implement this.
     return 'STUB -- Program Interpreter Unimplemented';
   }
 
-  DefineOperation(ctx) {
+  DefineOperation (ctx) {
     // TODO: Implement this.
     return 'STUB -- DefineOperation Interpreter Unimplemented';
   }
 
-  DefineStmt(ctx) {
+  DefineStmt (ctx) {
     // TODO: Implement this.
     return 'STUB -- DefineStmt Interpreter Unimplemented';
   }
 
-  Node(ctx) {
+  Node (ctx) {
     // TODO: Implement this.
     return 'STUB -- Node Interpreter Unimplemented';
   }
 
-  Edge(ctx) {
+  Edge (ctx) {
     // TODO: Implement this.
     return 'STUB -- Edge Interpreter Unimplemented';
+  }
+
+  DrawOperation (ctx) {
+    // TODO: Implement this.
+    return 'STUB -- DrawOperation Interpreter Unimplemented';
+  }
+
+  MergeOperation (ctx) {
+    // TODO: Implement this.
+    return 'STUB -- MergeOperation Interpreter Unimplemented';
+  }
+
+  MergeStmt (ctx) {
+    // TODO: Implement this.
+    return 'STUB -- MergeStmt Interpreter Unimplemented';
+  }
+
+  MergeNode (ctx) {
+    // TODO: Implement this.
+    return 'STUB -- MergeNode Interpreter Unimplemented';
+  }
+
+  MergeEdge (ctx) {
+    // TODO: Implement this.
+    return 'STUB -- MergeEdge Interpreter Unimplemented';
+  }
+
+  PropIdentifier (ctx) {
+    return 'STUB -- PropIdentifier Interpreter Unimplemented';
   }
 }
 

@@ -24,7 +24,7 @@ const main = async (argv = process.argv.slice(2)) => {
   }
 
   // Load sample snippet.
-  const sampleContent = fs.readFileSync('./samples/simple.btk', 'utf8');
+  const sampleContent = fs.readFileSync('./samples/merge.btk', 'utf8');
   logger.log('Sample file loaded!');
 
   // Parse the sample snippet.
