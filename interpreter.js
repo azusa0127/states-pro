@@ -17,7 +17,7 @@ const { parser } = require('./parser');
 // Obtains the default CstVisitor constructor to extend.
 const BaseCstVisitor = parser.getBaseCstVisitorConstructor();
 
-// All our semantics go into the visitor, completly separated from the grammar.
+// All our semantics go into the visitor, completely separated from the grammar.
 // Feel free to refactor the RULES more from parser if needed.
 class DSLInterpreter extends BaseCstVisitor {
   constructor() {
