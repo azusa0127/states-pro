@@ -1,3 +1,3 @@
 module.exports = {
-    "extends": "standard-next"
+  "extends": "standard-next"
 };

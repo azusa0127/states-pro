@@ -1,13 +1,14 @@
 const fs = require('fs');
 const { Logger } = require('simple.logger');
 const minimist = require('minimist');
-const diff = require('diff');
 
-const { parseDSL } = require('./parser');
-const { interpretDSL } = require('./interpreter');
+const { parseDSL } = require('./lib/parser');
+const { interpretDSL } = require('./lib/interpreter');
 
 // A convenient debug console printer with same interface as `global.console`
-const logger = new Logger({ level: 'log', showTime: false });
+const logger = new Logger({ level: 'info', showTime: false });
+
+const sampleFile = 'samples/simple.btk';
 
 // Main Function
 const main = async (argv = process.argv.slice(2)) => {
@@ -15,8 +16,9 @@ const main = async (argv = process.argv.slice(2)) => {
   const args = minimist(argv);
   const {
     // Verbose logger switch (default: false)
-    verbose = args.v | false,
-    test = args.t | false,
+    verbose = args.v || false,
+    file = args.f || sampleFile,
+    output = args.o || false,
   } = args;
 
   if (verbose) {
@@ -24,34 +26,28 @@ const main = async (argv = process.argv.slice(2)) => {
   }
 
   // Load sample snippet.
-  const sampleContent = fs.readFileSync('./samples/merge.btk', 'utf8');
+  const content = fs.readFileSync(file, 'utf8');
   logger.log('Sample file loaded!');
 
   // Parse the sample snippet.
-  const sampleParsedResult = parseDSL(sampleContent);
-  if (sampleParsedResult.lexErrors.length || sampleParsedResult.parseErrors.length) {
+  const parsedResult = parseDSL(content);
+  if (parsedResult.lexErrors.length || parsedResult.parseErrors.length) {
     logger.warn('Errors during parsing the sample file');
-    logger.warn(sampleParsedResult);
+    logger.warn(parsedResult);
   } else {
     logger.log('Sample file parsed successfully!');
-    logger.debug(sampleParsedResult); // Only shown under Verbose mode.
+    logger.debug(parsedResult); // Only shown under Verbose mode.
   }
 
   // Interpret the parsed snippet CST
-  const sampleInterpretedResult = interpretDSL(sampleParsedResult.cst);
+  const interpretedResult = interpretDSL(parsedResult.cst);
   logger.log('Sample CST interpreted successfully!');
-  logger.info(sampleInterpretedResult);
-
-  // Test the interpretation with simple test:
-  if (test) {
-    // Load test snippet.
-    const textSampleContent = fs.readFileSync('./samples/simple.tex', 'utf8');
-    logger.log('Sample test latex file loaded!');
-
-    const resultDiff = diff.diffLines(textSampleContent, sampleInterpretedResult);
-    if (resultDiff.length) {
-      logger.warn(resultDiff);
-    }
+  logger.debug(interpretedResult);
+  if (output) {
+    fs.writeFileSync(output, interpretedResult, 'utf8');
+    logger.info(`Done. Result wrote to ${output}.`);
+  } else {
+    console.info(interpretedResult);
   }
 };
 

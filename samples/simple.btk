@@ -8,3 +8,12 @@ define StateMachine m1 {
 define StateMachine m2 {
   q5(sf,LoopBack) -> q5(`0`)
 }
+
+
+merge StateMachine m1 m2 as m3 {
+    m1.q1(s)
+    m1.q2 -> m2.q5(`test`)
+    m2.q5 -> m1.q3
+}
+
+draw m1,m2,m3

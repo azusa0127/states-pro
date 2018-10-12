@@ -14,6 +14,35 @@
 
 A DSL aims to draw state machines, turing machines, and Pushdown Automata.
 
+## Sample translation result
+https://www.overleaf.com/read/mrnvyyqcxdry
+
+## How to use
+- Install dependencies
+```bash
+npm i
+```
+
+- Translate samples/simple.btk
+```bash
+node index.js
+```
+
+- Verbose output to see logs and CST trees
+```bash
+node index.js -v
+```
+
+- Translate inputFile.btk
+```bash
+node index.js -f inputFile.btk
+```
+
+- Save latex result into outputFile.tex
+```bash
+node index.js -o outputFile.tex
+```
+
 ## Goals
 
 1. Design the language and come up with examples.
@@ -49,7 +78,7 @@ Node ::= Identifier, [ "(", NodeState, [ ",", Label ], ")"]
 Edge ::= Identifier, [ "(", Label, ")" ]
 NodeState ::= 's' | 'f' | 'sf' | 'fs' | 'n'
 
-DrawOperation ::= 'draw', Identifier, LineBreak
+DrawOperation ::= 'draw', Identifier, { Identifier }, LineBreak
 
 MergeOperation ::= 'merge', FigureType, Identifier, Identifier, 'as', Identifier, "{", LineBreak, MergeStmt, { MergeStmt }, "}", LineBreak
 MergeStmt ::= MergeNode, [ '->', MergeEdge, { ",", MergeEdge } ], LineBreak
