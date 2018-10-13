@@ -94,4 +94,7 @@ playground
 # .editorconfig
 .editorconfig
 
-.vscode 
+# render result
+outputs/
+
+.vscode

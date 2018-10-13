@@ -1,0 +1,3 @@
+define StateMachine m {
+  q0(sf) -> q0(a), q0(b), q0(c)
+}
