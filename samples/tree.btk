@@ -1,0 +1,13 @@
+define StateMachine tree {
+    a(s) -> b(`0`), e($\epsilon$), h(`0`)
+    b -> c($\epsilon$)
+    c -> d(`1`)
+    d(f)
+    e -> z(`1`), g(`1`)
+    h -> i(`1`)
+    i -> j($\epsilon$)
+    j -> k($\epsilon$)
+}
+
+draw tree
+

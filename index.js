@@ -33,21 +33,24 @@ const main = async (argv = process.argv.slice(2)) => {
   const parsedResult = parseDSL(content);
   if (parsedResult.lexErrors.length || parsedResult.parseErrors.length) {
     logger.warn('Errors during parsing the sample file');
-    logger.warn(parsedResult);
+    const parserErrors = parsedResult.parseErrors;
+    parserErrors.forEach(e => logger.warn(`${e.name}: ${e.message}`));
+    const lexErrors = parsedResult.lexErrors;
+    lexErrors.forEach(e => logger.warn(`${e.name}: ${e.message}`));
   } else {
     logger.log('Sample file parsed successfully!');
     logger.debug(parsedResult); // Only shown under Verbose mode.
-  }
 
-  // Interpret the parsed snippet CST
-  const interpretedResult = interpretDSL(parsedResult.cst);
-  logger.log('Sample CST interpreted successfully!');
-  logger.debug(interpretedResult);
-  if (output) {
-    fs.writeFileSync(output, interpretedResult, 'utf8');
-    logger.info(`Done. Result wrote to ${output}.`);
-  } else {
-    console.info(interpretedResult);
+    // Interpret the parsed snippet CST
+    const interpretedResult = interpretDSL(parsedResult.cst);
+    logger.log('Sample CST interpreted successfully!');
+    logger.debug(interpretedResult);
+    if (output) {
+      fs.writeFileSync(output, interpretedResult, 'utf8');
+      logger.info(`Done. Result wrote to ${output}.`);
+    } else {
+      console.info(interpretedResult);
+    }
   }
 };
 

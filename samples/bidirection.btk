@@ -1,0 +1,7 @@
+define StateMachine m {
+  q0(s) -> q1
+  q1 -> q0
+  q0 -> q1
+}
+
+draw m

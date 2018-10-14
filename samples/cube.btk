@@ -4,3 +4,6 @@ define StateMachine m {
   q2(f) -> q2(`0`), q3(`1,2`)
   q3(f) -> q3(`1,2`)
 }
+
+
+draw m

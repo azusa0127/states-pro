@@ -1,0 +1,10 @@
+define StateMachine m {
+  q3 -> q1($0$)
+  q0(s) -> q1($0$), q2($1$)
+  q2(f) -> q2($1$)
+  q1(f) -> q1($0$)
+  q4 -> q2($1$)
+}
+
+draw m
+

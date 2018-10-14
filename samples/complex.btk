@@ -1,0 +1,16 @@
+define StateMachine m {
+    q0(s, $q_0$) -> q1($\epsilon, \epsilon \rightarrow $)
+    q1(n, $q_1$) -> q2($a, \epsilon \rightarrow a$), q2($b, \epsilon \rightarrow b$)
+    q2(n, $q_2$) -> q3($a, \epsilon \rightarrow a$), q3($b, \epsilon \rightarrow b$)
+    q2 -> q6($\epsilon \rightarrow \epsilon$), q6($b, \epsilon \rightarrow \epsilon$)
+    q3(n, $q_3$) -> q4($a, \epsilon \rightarrow a$), q4($b, \epsilon \rightarrow b$)
+    q4(n, $q_4$) -> q5($a, a \rightarrow \epsilon$), q5($b, b \rightarrow \epsilon$), q1($\epsilon, \epsilon \rightarrow \epsilon$)
+    q5(n, $q_5$) -> q6($a, a \rightarrow \epsilon$), q6($b, b \rightarrow \epsilon$)
+    q6(n, $q_6$) -> q7($a, a \rightarrow \epsilon$), q7($b, b \rightarrow \epsilon$)
+    q7(n, $q_7$) -> q8($\epsilon, \rightarrow \epsilon$), q5($a, a \rightarrow \epsilon$), q5($b, b \rightarrow \epsilon$)
+    q8(f, $q_8$)
+}
+
+draw m
+
+
