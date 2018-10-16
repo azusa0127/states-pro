@@ -62,17 +62,18 @@ Digit ::= "0" | "1" | "2" | ... | "9" ;
 Symbol = "[" | "]" | "{" | "}" | "(" | ")" | "<" | ">" | "'" | '"' | "=" | "|" | "." | "," | ";" | "\";
 String = { WhiteSpace | Letter | Digit | Symbol }
 
-Label ::= StringLabel | LatexLabel | Identifier
+Label ::= StringLabel | LatexLabel | Identifier | Numeric
 LatexLabel ::= "$", String, "$"
 StringLabel ::= "`", String, "`"
 Identifier ::= Letter, { Letter | Digit | "_" }
+Numeric ::= [ "-" ], Digit, { Digit | Letter | "." }
 PropIdentifier ::= Identifier, ".", Identifier
 
 FigureType ::= 'StateMachine'
 
-Program ::= DefineOperation, { DefineOperation | DrawOperation | MergeOperation }
+Program ::= DefineOperation, { DefineOperation }, { EditOperation | MergeOperation | DrawOperation }
 
-DefineOperation ::= 'define', FigureType, Identifier, "{", LineBreak, DefineStmt, { DefineStmt }, "}", LineBreak
+DefineOperation ::= 'define', [ FigureType ], Identifier, "{", LineBreak, DefineStmt, { DefineStmt }, "}", LineBreak
 DefineStmt ::= Node, [ '->', Edge, { ",", Edge} ], LineBreak
 Node ::= Identifier, [ "(", NodeState, [ ",", Label ], ")"]
 Edge ::= Identifier, [ "(", Label, ")" ]
@@ -80,10 +81,13 @@ NodeState ::= 's' | 'f' | 'sf' | 'fs' | 'n'
 
 DrawOperation ::= 'draw', Identifier, { Identifier }, LineBreak
 
-MergeOperation ::= 'merge', FigureType, Identifier, Identifier, 'as', Identifier, "{", LineBreak, MergeStmt, { MergeStmt }, "}", LineBreak
+MergeOperation ::= 'merge', [ FigureType ], Identifier, { [","], Identifier }, 'as', Identifier, "{", LineBreak, MergeStmt, { MergeStmt }, "}", LineBreak
 MergeStmt ::= MergeNode, [ '->', MergeEdge, { ",", MergeEdge } ], LineBreak
 MergeNode ::= PropIdentifier, [ "(", NodeState, [ ",", Label ], ")" ]
 MergeEdge ::= PropIdentifier, [ "(", Label, ")" ]
+
+EditOperation ::= 'edit', [ FigureType ], Identifier, ['as', Identifier], "{", LineBreak, { DeleteStmt }, { DefineStmt }, "}", LineBreak
+DeleteStmt ::= 'delete', DefineStmt
 ```
 
 ## Examples

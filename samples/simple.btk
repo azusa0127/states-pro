@@ -1,19 +1,29 @@
-define StateMachine m1 {
-  q1(sf,`M.I.D`) -> q2(`0`), q3($0,1,\epsilon$)
+define m1 {
+  q1(sf, 1) -> q2(0), q3($0,1,\epsilon$)
   q2(n, qAccept) -> q1(`0,1`)
   q3(f,$q_3$)
 }
 
 
 define StateMachine m2 {
-  q5(sf,LoopBack) -> q5(`0`)
+  q5(sf,LoopBack) -> q5(0)
+  q9(f) -> q9(0)
 }
 
+edit m2 as m22 {
+  q5->q9(1)
+}
 
-merge StateMachine m1 m2 as m3 {
+draw m2
+
+edit m2 {
+  delete q9
+}
+
+merge m1, m2 as m_3 {
     m1.q1(s)
     m1.q2 -> m2.q5(`test`)
     m2.q5 -> m1.q3
 }
 
-draw m1,m2,m3
+draw m1,m2,m_3,m22
