@@ -1,0 +1,22 @@
+define StateMachine m2 {
+  q5(sf, loop) -> q5(0)
+  q9(f) -> q9(0)
+}
+
+draw m2
+
+edit m2 as m2copy {
+  q5->q9(1)
+}
+
+draw m2, m2copy
+
+edit m2 {
+  delete q9
+  q5 -> a, b
+  a -> c
+  c -> b
+}
+
+draw m2
+

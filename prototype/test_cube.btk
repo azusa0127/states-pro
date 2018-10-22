@@ -11,4 +11,4 @@ draw m1
 merge m1 as m2 {
      m2.q1
      q0(n)
- }
+}

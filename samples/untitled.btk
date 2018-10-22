@@ -7,3 +7,5 @@ define StateMachine m {
   q2 -> q4($0$)
   q1 -> q3($1$)
 }
+
+draw m

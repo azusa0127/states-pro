@@ -1,0 +1,23 @@
+define m1 {
+  q2(f) -> q2(1)
+  q0(s) -> q1(0), q2(1)
+  q1(f) -> q1(0)
+  q4 -> q2(1)
+  q3 -> q1(0)
+  q2 -> q4(0)
+  q1 -> q3(1)
+}
+
+define m2 {
+  q5(s) -> q6(a)
+  q6 -> q7(a)
+  q5 -> q7(b)
+  q7(f)
+}
+
+merge m1, m2 as m3 {
+  m2.q5(n)
+  m1.q0 -> m2.q5($\epsilon$)
+}
+
+draw m1, m2, m3
