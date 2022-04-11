@@ -10,7 +10,7 @@
     "license": "ISC",
     "dependencies": {
         "chevrotain": "^4.8.0",
-        "minimist": "^1.2.0",
+        "minimist": "^1.2.6",
         "opn": "^6.0.0",
         "simple.logger": "^2.0.1"
     },
